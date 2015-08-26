@@ -1,4 +1,4 @@
-package ex2;
+package fibonacciobserver;
 
 
 import java.util.ArrayList;
