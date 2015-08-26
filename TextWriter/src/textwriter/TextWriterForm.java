@@ -59,15 +59,21 @@ public class TextWriterForm extends javax.swing.JFrame {
         }
 
         public void run() {
-
+                
+            FileWriter writer;
+            
             // We just keep running @TODO Rethink this
             while (true) {
-
-                FileWriter writer;
-
+                
                 try {
+                        
+                    // We start sleeping, since theres no reason to start
+                    // backing up instantly.
+                    Thread.sleep(15000);
+                    
                     writer = new FileWriter(new File(userDir, "text_writer_backup.txt"), false);
                     PrintWriter out = new PrintWriter(writer);
+                    List<String> lines = textWriterForm.getLines();
 
                     for (int i = 0; i < lines.size(); i++) {
                         out.println(lines.get(i));
@@ -75,9 +81,9 @@ public class TextWriterForm extends javax.swing.JFrame {
 
                     out.close();
                     
-                    
-                    
                 } catch (IOException ex) {
+                    Logger.getLogger(TextWriterForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
                     Logger.getLogger(TextWriterForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
